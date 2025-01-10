@@ -46,6 +46,19 @@ public class Matrix {
         return sum;
     }
 
+    public static Matrix subtract(Matrix a, Matrix b) {
+        if (a.rowsCount != b.rowsCount || a.colsCount != b.colsCount) {
+            throw new IllegalArgumentException();
+        }
+        var diff = new Matrix(a.rowsCount, a.colsCount);
+        for (int i = 0; i < diff.rowsCount; i++) {
+            for (int j = 0; j < diff.colsCount; j++) {
+                diff.set(i, j, a.get(i, j) - b.get(i, j));
+            }
+        }
+        return diff;
+    }
+
     private boolean isValid(List<List<Double>> values) {
         return  values != null &&
                 values.size() >= MIN_SIZE &&

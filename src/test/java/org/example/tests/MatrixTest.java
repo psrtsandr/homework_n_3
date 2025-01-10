@@ -113,4 +113,36 @@ public class MatrixTest {
             }
         }
     }
+
+    @Test
+    public void subtractThrowsWhenMatrixSizesDoNotMatch() {
+        var a = new Matrix(2, 3);
+        var b = new Matrix(3, 2);
+        assertThrows(IllegalArgumentException.class, () -> Matrix.subtract(a, b));
+    }
+
+    @Test
+    public void testSubtract() {
+        var a = new Matrix(Arrays.asList(
+                Arrays.asList(1d, 2d, 3d),
+                Arrays.asList(1d, 2d, 3d),
+                Arrays.asList(1d, 2d, 3d)
+        ));
+        var b = new Matrix(Arrays.asList(
+                Arrays.asList(7d, 8d, 9d),
+                Arrays.asList(7d, 8d, 9d),
+                Arrays.asList(7d, 8d, 9d)
+        ));
+        var expected = Arrays.asList(
+                Arrays.asList(-6d, -6d, -6d),
+                Arrays.asList(-6d, -6d, -6d),
+                Arrays.asList(-6d, -6d, -6d)
+        );
+        var actual = Matrix.subtract(a, b);
+        for (int i = 0; i < expected.size(); i++) {
+            for (int j = 0; j < expected.get(i).size(); j++) {
+                assertEquals(expected.get(i).get(j), actual.get(i, j));
+            }
+        }
+    }
 }
