@@ -81,4 +81,36 @@ public class MatrixTest {
         assertThrows(IndexOutOfBoundsException.class, () -> matrix.get(0, 3));
         assertThrows(IndexOutOfBoundsException.class, () -> matrix.get(3, 0));
     }
+
+    @Test
+    public void addThrowsWhenMatrixSizesDoNotMatch() {
+        var a = new Matrix(2, 3);
+        var b = new Matrix(3, 2);
+        assertThrows(IllegalArgumentException.class, () -> Matrix.add(a, b));
+    }
+
+    @Test
+    public void testAdd() {
+        var a = new Matrix(Arrays.asList(
+                Arrays.asList(1d, 2d, 3d),
+                Arrays.asList(1d, 2d, 3d),
+                Arrays.asList(1d, 2d, 3d)
+        ));
+        var b = new Matrix(Arrays.asList(
+                Arrays.asList(7d, 8d, 9d),
+                Arrays.asList(7d, 8d, 9d),
+                Arrays.asList(7d, 8d, 9d)
+        ));
+        var expected = Arrays.asList(
+                Arrays.asList(8d, 10d, 12d),
+                Arrays.asList(8d, 10d, 12d),
+                Arrays.asList(8d, 10d, 12d)
+        );
+        var actual = Matrix.add(a, b);
+        for (int i = 0; i < expected.size(); i++) {
+            for (int j = 0; j < expected.get(i).size(); j++) {
+                assertEquals(expected.get(i).get(j), actual.get(i, j));
+            }
+        }
+    }
 }
